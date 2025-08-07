@@ -1,1 +1,240 @@
-<h1> Deniel Novella</h1>
+import { useState, useEffect } from 'react';
+import { Mail, Phone, MapPin, Briefcase, Award, GraduationCap } from 'lucide-react';
+
+// Data from the resume
+const resumeData = {
+  name: "DENIEL NOVELLA",
+  email: "denielnovella.estrada@gmail.com",
+  phone: "+1-868-367-0317",
+  location: "St. Joseph, Trinidad, Trinidad & Tobago.",
+  summary: "Detail-oriented with expertise in project management, grant writing, fundraising, and community engagement. Proven track record in advocacy and training, successfully leading initiatives that integrate gender perspectives and streamline equity, diversity, and inclusion practices. Skilled in research and data management, driving impactful outreach programs while fostering collaborative team environments. Aiming to leverage community organizing skills to enhance initiatives and support sustainability goals.",
+  skills: {
+    technical: ["Canva", "Microsoft Office Suite", "Google Suite"],
+    general: [
+      "Advanced communication and interpersonal skills",
+      "Strong problem-solving, critical thinking, and analytical abilities",
+      "Expertise in project/event management",
+      "Proficient in research, data analysis, and report writing/editing",
+      "Experienced in grant writing, fundraising, and policy/procedure development",
+      "Skilled in gender analysis, diversity awareness, and intersectional Caribbean perspectives",
+      "Effective training module development and adaptable teaching strategies",
+      "Proficient with ICT tools and virtual collaboration platforms (eg., MS Teams, Zoom)",
+      "Strong time management, organization, and document management skills",
+      "Classroom management, academic instruction, and student engagement expertise"
+    ]
+  },
+  experience: [
+    {
+      title: "EXPEDITION CREW",
+      company: "Caribbean Cetacean Society",
+      location: "South Caribbean Sea Region, St. Lucia, St Vincent, Grenada",
+      date: "April 2025",
+      description: [
+        "Conducted systematic visual surveys, tracking cetacean movement patterns and recording sightings, behavioral data, and photo identification data in real time.",
+        "Supported acoustic monitoring efforts, deploying and retrieving hydrophone to capture acoustic data for analysis of cetacean vocalizations.",
+        "Assisted in the basic care and maintenance of research vessel to ensure operational readiness while working with the field team to support data integrity, safety and daily expedition objectives."
+      ]
+    },
+    {
+      title: "PANELIST PRESENTER",
+      company: "GENDERISE International Conference 2025",
+      location: "Remote, Trinidad, Trinidad & Tobago",
+      date: "March 2025",
+      description: [
+        "Presented on and discussed 'Restructuring Securities: Women's Leadership and Agency, at the intersection of Violence and Persistent Forms of Conflict in Garrison Communities in Post-Colonial Trinidad and Tobago."
+      ]
+    },
+    {
+      title: "COMMUNITY ORGANISER | FACILITATOR",
+      company: "GREENPEACE: ROOTS Organization",
+      location: "Remote, Trinidad, Trinidad & Tobago",
+      date: "March 2025",
+      description: [
+        "Worked on strategic organizing of, and co-facilitated the capacity building workshop collaboration between ROOTS Organization and WINAD - 'Community-led Approach: Developing Campaigns and Tactics with Impact.",
+        "Leveraged education, outreach, and training skills to engage participants and enhance their grassroots and community engagement capabilities."
+      ]
+    },
+    {
+      title: "RESEARCH ASSISTANT",
+      company: "The University of the West Indies",
+      location: "Remote, Trinidad, Trinidad & Tobago",
+      date: "March 2024 - Present",
+      description: [
+        "Collected data for the Break the Silence action research project examining the current interventions in Addressing Child Sexual Abuse and the ideas that contribute to its proliferation through conduction of participant interview.",
+        "Narrated participant profile of participants interview to outline context of participant background in relation to research project."
+      ]
+    },
+    {
+      title: "WRITER RESEARCHER | RAPPORTEUR",
+      company: "Women Institute for Alternative Development (WINAD)",
+      location: "Remote, Trinidad, Trinidad & Tobago",
+      date: "September 2018 - Present",
+      description: [
+        "Designed promotional materials, reports, and infographics; and represented WINAD at the 2024 Caribbean Climate Justice Camp, facilitating a workshop on community engagement and research.",
+        "Provided research, technical, and rapporteur support for workshops and other programs; and co-authored an article based on WINAD's research findings.",
+        "Authored a grant proposal for the Sport and Culture Fund."
+      ]
+    },
+    {
+      title: "ADMINISTRATIVE STAFF",
+      company: "The University of the West Indies",
+      location: "St Augustine, Trinidad, Trinidad & Tobago",
+      date: "June 2017 - Present",
+      description: [
+        "Extensive experience in administrative roles across diverse departments, showcasing a strong capacity for project, office, and document management.",
+        "Proven ability to streamline administrative processes, manage student records, coordinate communications, and provide comprehensive support.",
+        "Demonstrated superior organizational and communication skills through responsibilities such as advising, correspondence, record-keeping, and event coordination.",
+        "Adaptable and flexible in working across various offices, with experience in facilities management, HR support, and student affairs.",
+        "Skilled in maintaining professional environments, supporting diverse colleagues, and managing multiple tasks with efficiency."
+      ]
+    },
+  ],
+  education: [
+    {
+      degree: "Postgraduate Diploma",
+      field: "Gender and Development Studies",
+      institution: "The University of the West Indies",
+      location: "St Augustine, Trinidad, Trinidad & Tobago",
+      date: "06/2023"
+    },
+    {
+      degree: "Certificate",
+      field: "Project Management",
+      institution: "The University of California",
+      location: "Remote",
+      date: "10/2020"
+    },
+    {
+      degree: "Bachelor of Science",
+      field: "Physics, with Gender and Development Minor",
+      institution: "The University of the West Indies",
+      location: "St Augustine, Trinidad, Trinidad & Tobago",
+      date: "09/2018"
+    }
+  ]
+};
+
+const Header = ({ name, email, phone, location }) => (
+  <header className="bg-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-4xl mx-auto text-center">
+      <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-2 font-inter">{name}</h1>
+      <p className="text-xl sm:text-2xl mb-6">Project Management & Community Engagement</p>
+      <div className="flex flex-wrap justify-center items-center gap-4 text-sm sm:text-base">
+        <a href={`mailto:${email}`} className="flex items-center gap-2 hover:text-slate-300 transition-colors duration-300">
+          <Mail size={16} /> {email}
+        </a>
+        <a href={`tel:${phone}`} className="flex items-center gap-2 hover:text-slate-300 transition-colors duration-300">
+          <Phone size={16} /> {phone}
+        </a>
+        <div className="flex items-center gap-2">
+          <MapPin size={16} /> {location}
+        </div>
+      </div>
+    </div>
+  </header>
+);
+
+const Section = ({ title, children, icon }) => (
+  <section className="py-12 px-4 sm:px-6 lg:px-8 border-b border-gray-200">
+    <div className="max-w-4xl mx-auto">
+      <h2 className="flex items-center text-3xl font-bold mb-8 text-slate-800 font-inter">
+        {icon}
+        <span className="ml-3">{title}</span>
+      </h2>
+      {children}
+    </div>
+  </section>
+);
+
+const Skills = ({ technical, general }) => (
+  <>
+    <div className="mb-8">
+      <h3 className="text-xl font-semibold mb-4 text-slate-700">Technical Skills</h3>
+      <div className="flex flex-wrap gap-2">
+        {technical.map((skill, index) => (
+          <span key={index} className="bg-slate-200 text-slate-700 text-sm font-medium px-3 py-1 rounded-full">{skill}</span>
+        ))}
+      </div>
+    </div>
+    <div>
+      <h3 className="text-xl font-semibold mb-4 text-slate-700">Other Skills</h3>
+      <ul className="list-disc list-inside space-y-2 text-slate-600">
+        {general.map((skill, index) => (
+          <li key={index}>{skill}</li>
+        ))}
+      </ul>
+    </div>
+  </>
+);
+
+const ExperienceItem = ({ title, company, location, date, description }) => (
+  <div className="mb-8 p-6 bg-white rounded-xl shadow-lg border border-gray-100 transition-transform transform hover:scale-[1.01] duration-300">
+    <div className="flex justify-between items-start mb-2">
+      <h3 className="text-xl font-bold text-slate-800">{title}</h3>
+      <span className="text-sm text-gray-500 font-medium">{date}</span>
+    </div>
+    <div className="flex justify-between items-end mb-4">
+      <p className="text-lg text-slate-600 font-semibold">{company}</p>
+      <p className="text-sm text-gray-400 font-light">{location}</p>
+    </div>
+    <ul className="list-disc list-inside space-y-1 text-slate-700">
+      {description.map((point, index) => (
+        <li key={index}>{point}</li>
+      ))}
+    </ul>
+  </div>
+);
+
+const EducationItem = ({ degree, field, institution, location, date }) => (
+  <div className="mb-6 p-5 bg-white rounded-lg shadow-sm border border-gray-100 transition-transform transform hover:scale-[1.01] duration-300">
+    <div className="flex justify-between items-start mb-1">
+      <h3 className="text-lg font-bold text-slate-800">{degree}</h3>
+      <span className="text-sm text-gray-500 font-medium">{date}</span>
+    </div>
+    <p className="text-md text-slate-600 font-semibold">{field}</p>
+    <p className="text-sm text-gray-500">{institution}, {location}</p>
+  </div>
+);
+
+const Footer = () => (
+  <footer className="bg-slate-900 text-white text-center py-6">
+    <p className="text-sm">&copy; {new Date().getFullYear()} Deniel Novella. All rights reserved.</p>
+  </footer>
+);
+
+const App = () => {
+  return (
+    <div className="min-h-screen bg-gray-50 font-inter">
+      <Header
+        name={resumeData.name}
+        email={resumeData.email}
+        phone={resumeData.phone}
+        location={resumeData.location}
+      />
+      <main>
+        <Section title="Summary" icon={<Briefcase size={28} />}>
+          <p className="text-lg text-slate-700 leading-relaxed">{resumeData.summary}</p>
+        </Section>
+
+        <Section title="Experience" icon={<Award size={28} />}>
+          {resumeData.experience.map((job, index) => (
+            <ExperienceItem key={index} {...job} />
+          ))}
+        </Section>
+        
+        <Section title="Skills" icon={<Award size={28} />}>
+          <Skills technical={resumeData.skills.technical} general={resumeData.skills.general} />
+        </Section>
+        
+        <Section title="Education" icon={<GraduationCap size={28} />}>
+          {resumeData.education.map((edu, index) => (
+            <EducationItem key={index} {...edu} />
+          ))}
+        </Section>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default App;
